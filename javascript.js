@@ -1,39 +1,92 @@
 
-var timeOfDay = moment();
+var timeOfDay = moment()
 console.log(timeOfDay);
+
+var timeOfHour = Date.now();
 
 $("#currentDay").text(`${timeOfDay.format('dddd,MMMMM Do')}`);
 
-var hourslot = moment().hour();
-console.log(hourslot);
 
 
-$(document).ready(function(){
-    $(".row").hover(function(){
-      $(this).css("background-color", "orange");
-      }, function(){
-      $(this).css("background-color", "grey");
-    });
-  });
 
- 
 
-var hourtimes = ["9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm"];
-    hourtimes.forEach(function(hourslot){
-    console.log(hourslot);
-});
-    
-    
+$(document).ready(function () {
+    $(".saveBtn").on("click",function(){
+        var value = $(this).siblings(".description").val()
+        var time =$(this).parent().attr("id")
+        localStorage.setItem(time, value)
+    })
+    $("#hour-9 .description").val(localStorage.getItem("hour-9"))
+    $("#hour-10 .description").val(localStorage.getItem("hour-10"))
+    $("#hour-11 .description").val(localStorage.getItem("hour-11"))
+    $("#hour-12 .description").val(localStorage.getItem("hour-12"))
+    $("#hour-13 .description").val(localStorage.getItem("hour-13"))
+    $("#hour-14 .description").val(localStorage.getItem("hour-14"))
+    $("#hour-15 .description").val(localStorage.getItem("hour-15"))
+    $("#hour-16 .description").val(localStorage.getItem("hour-16"))
+    $("#hour-17 .description").val(localStorage.getItem("hour-17"))
 
-function oclock() {
-    var n = document.getUTChours()+1;
-    var hourslot;
-    console.log(hourslot);
-    if (n = n) {
-        $(".saveBtn").addClass(btn)
+
+
+
+
+
+
+    function timeblockUpdater() {
+        var currentHour = moment().hours()
+        $(".time-block").each(function () {
+            var blockHour = parseInt($(this).attr("id").split("-")[1])
+            console.log(currentHour, blockHour);
+            if (blockHour < currentHour) {
+                $(this).addClass("past")
+            }
+            else if (blockHour === currentHour) {
+                $(this).removeClass("past")
+                $(this).addClass("present")
+            }
+            else {
+                $(this).removeClass("past")
+                $(this).removeClass("present")
+                $(this).addClass("future")
+
+
+            }
+
+        })
     }
+    timeblockUpdater()
     
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
