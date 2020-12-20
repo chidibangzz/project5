@@ -1,6 +1,6 @@
 
 var timeOfDay = moment()
-console.log(timeOfDay);
+
 
 var timeOfHour = Date.now();
 
